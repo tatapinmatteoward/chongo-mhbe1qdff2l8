@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "A simple blog site offering step-by-step guides to diagnose and fix the most frequent errors encountered on personal computers." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 text-gray-900">
+    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition">
+            PC Error Fixer
+          </a>
+          <div class="flex items-center space-x-2 md:space-x-4">
+            <a href="/" class="px-4 py-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 font-medium transition">
+              Home
+            </a>
+            <a href="/about/" class="px-4 py-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 font-medium transition">
+              About
+            </a>
+            <a href="/blog/" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 font-medium transition shadow-md hover:shadow-lg">
+              Blog
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="max-w-7xl mx-auto px-6 py-12 min-h-[calc(100vh-200px)]">
+      <slot />
+    </main>
+    
+    <footer class="bg-white/80 backdrop-blur-md border-t border-gray-200 mt-20">
+      <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="text-center md:text-left">
+            <p class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+              PC Error Fixer
+            </p>
+            <p class="text-sm text-gray-600">&copy; {new Date().getFullYear()} All rights reserved.</p>
+          </div>
+          <div class="flex gap-4">
+            <a href="/" class="text-gray-600 hover:text-blue-600 transition">Home</a>
+            <span class="text-gray-300">•</span>
+            <a href="/about/" class="text-gray-600 hover:text-blue-600 transition">About</a>
+            <span class="text-gray-300">•</span>
+            <a href="/blog/" class="text-gray-600 hover:text-blue-600 transition">Blog</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
