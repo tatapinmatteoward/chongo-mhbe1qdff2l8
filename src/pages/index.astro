@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const home = await getEntry('pages', 'home');
+if (!home) throw new Error('Home page not found');
+const { Content } = await home.render();
+---
+
+<Layout title={home.data.title}>
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16">
+      <h1 class="text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+        {home.data.title}
+      </h1>
+      {home.data.description && (
+        <p class="text-xl lg:text-2xl text-gray-600 mb-8">{home.data.description}</p>
+      )}
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="/blog/" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+          Explore Articles
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <a href="/about/" class="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all shadow-md hover:shadow-lg">
+          Learn More
+        </a>
+      </div>
+    </div>
+
+    <div class="prose prose-lg max-w-none">
+      <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 lg:p-12 shadow-md">
+        <Content />
+      </div>
+    </div>
+  </div>
+</Layout>
